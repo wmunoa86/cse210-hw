@@ -1,6 +1,6 @@
 public abstract class Task
 {
-    public string Title { get; set; }
+    protected string Title { get; set; }
     public bool IsCompleted { get; set; }
 
     // Constructor
