@@ -11,7 +11,7 @@ public class RecurringTask : Task
     // Implementing abstract method to display task details
     public override void DisplayTaskDetails()
     {
-        Console.WriteLine($"[Recurring Task] Title: {Title}, Frequency: {Frequency}, Completed: {IsCompleted}");
+        Console.WriteLine($"[Recurring Task] Title: {Title}, Frequency: {Frequency}, Status: {TaskStatus.Status}");
     }
 
     // Implementing abstract method to update task details

@@ -1,13 +1,13 @@
 public abstract class Task
 {
-    protected string Title { get; set; }
-    public bool IsCompleted { get; set; }
+    public string Title { get; set; }
+    public TaskStatus TaskStatus { get; set; }
 
     // Constructor
     public Task(string title)
     {
         Title = title;
-        IsCompleted = false;
+        TaskStatus = new TaskStatus(TaskStatusEnum.InProgress); // Default status is InProgress
     }
 
     // Abstract method for displaying task details

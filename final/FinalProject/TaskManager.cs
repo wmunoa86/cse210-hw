@@ -14,13 +14,13 @@ public class TaskManager
         tasks.Add(task);
     }
 
-    // Method to mark a task as complete
-    public void MarkTaskAsComplete(int index)
+    // Method to mark a task as complete or in progress
+    public void UpdateTaskStatus(int index, TaskStatusEnum newStatus)
     {
         if (index >= 0 && index < tasks.Count)
         {
-            tasks[index].IsCompleted = true;
-            Console.WriteLine("Task marked as complete.");
+            tasks[index].TaskStatus.Status = newStatus;
+            Console.WriteLine($"Task status updated to: {newStatus}");
         }
         else
         {
@@ -67,4 +67,4 @@ public class TaskManager
             Console.WriteLine("Invalid task index. Task not deleted.");
         }
     }
-}
+} 

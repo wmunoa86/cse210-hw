@@ -6,7 +6,7 @@ class Program
     {
         TaskManager taskManager = new TaskManager();
 
-        // Interactive menu loop
+                // Interactive menu loop
         while (true)
         {
             Console.WriteLine("Task Manager Menu:");
@@ -49,7 +49,6 @@ class Program
         }
     }
 
-    // Helper method to add a task based on user input
     static void AddTask(TaskManager taskManager)
     {
         Console.Write("Enter task title: ");
@@ -81,18 +80,51 @@ class Program
     }
 
     // Helper method to mark a task as complete based on user input
-    static void MarkTaskAsComplete(TaskManager taskManager)
+   static void MarkTaskAsComplete(TaskManager taskManager)
+{
+    Console.WriteLine("Select a task to update status:");
+    DisplayAllTasks(taskManager);
+
+    Console.Write("Enter the index of the task to update status: ");
+    if (int.TryParse(Console.ReadLine(), out int taskIndex))
     {
-        Console.Write("Enter the index of the task to mark as complete: ");
-        if (int.TryParse(Console.ReadLine(), out int taskIndex))
+        if (taskIndex >= 0 && taskIndex < taskManager.GetTaskCount())
         {
-            taskManager.MarkTaskAsComplete(taskIndex);
+            Task taskToUpdateStatus = taskManager.GetTaskByIndex(taskIndex);
+            Console.WriteLine($"Current Status: {taskToUpdateStatus.TaskStatus.Status}");
+            
+            Console.WriteLine("Choose new task status:");
+            Console.WriteLine("1. Completed");
+            Console.WriteLine("2. In Progress");
+
+            Console.Write("Enter your choice (1-2): ");
+            string statusChoice = Console.ReadLine();
+
+            switch (statusChoice)
+            {
+                case "1":
+                    taskManager.UpdateTaskStatus(taskIndex, TaskStatusEnum.Completed);
+                    Console.WriteLine("Task status updated to Completed.");
+                    break;
+                case "2":
+                    taskManager.UpdateTaskStatus(taskIndex, TaskStatusEnum.InProgress);
+                    Console.WriteLine("Task status updated to In Progress.");
+                    break;
+                default:
+                    Console.WriteLine("Invalid status choice. Task status not updated.");
+                    break;
+            }
         }
         else
         {
-            Console.WriteLine("Invalid input. Please enter a valid index.");
+            Console.WriteLine("Invalid task index. Task status not updated.");
         }
     }
+    else
+    {
+        Console.WriteLine("Invalid input. Please enter a valid index.");
+    }
+}
 
     // Helper method to display all tasks
     static void DisplayAllTasks(TaskManager taskManager)
@@ -136,8 +168,9 @@ class Program
         {
             if (taskIndex >= 0 && taskIndex < taskManager.GetTaskCount())
             {
+                Task taskToDelete = taskManager.GetTaskByIndex(taskIndex);
                 taskManager.DeleteTask(taskIndex);
-                Console.WriteLine("Task deleted successfully.");
+                Console.WriteLine($"Task '{taskToDelete.Title}' deleted successfully.");
             }
             else
             {
@@ -148,5 +181,5 @@ class Program
         {
             Console.WriteLine("Invalid input. Please enter a valid index.");
         }
-}
+    }
 }

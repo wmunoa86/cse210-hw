@@ -7,7 +7,7 @@ public class RegularTask : Task
     // Implementing abstract method to display task details
     public override void DisplayTaskDetails()
     {
-        Console.WriteLine($"[Regular Task] Title: {Title}, Completed: {IsCompleted}");
+        Console.WriteLine($"[Regular Task] Title: {Title}, Status: {TaskStatus.Status}");
     }
 
     // Implementing abstract method to update task details
